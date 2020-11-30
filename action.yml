@@ -20,6 +20,12 @@ inputs:
   instance-ids:
     required: true
     description: "AWS EC2 Instance id or ids"
+  max-status-check:
+    required: false
+    description: "Number of times to check for Status"
+  check-status-frequency:
+    required: false
+    description: "Frequency in seconds to check for status"
   command:
     required: false
     description: "Bash command you want to execute"

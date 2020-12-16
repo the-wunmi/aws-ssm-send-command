@@ -50,6 +50,7 @@ try {
         const CommandId = (_a = data.Command) === null || _a === void 0 ? void 0 : _a.CommandId
         for (const InstanceId of inputs.instanceIds) {
             for (const _ of new Array(inputs.maxStatusCheck).fill()) {
+                await new Promise(resolve => setTimeout(resolve, inputs.checkStatusFrequency * 1000))
                 const invocation = await ssm.getCommandInvocation({ CommandId, InstanceId }).promise()
                 console.log(invocation)
                 if (invocation.Status === 'Failed') {
@@ -59,7 +60,6 @@ try {
                 else if (invocation.Status === 'Success') {
                     break
                 }
-                await new Promise(resolve => setTimeout(resolve, inputs.checkStatusFrequency * 1000))
             }
         }
         console.log(data);

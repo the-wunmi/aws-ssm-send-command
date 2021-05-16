@@ -54,7 +54,7 @@ try {
                 await new Promise(resolve => setTimeout(resolve, inputs.checkStatusFrequency * 1000))
                 const invocation = await ssm.getCommandInvocation({ CommandId, InstanceId }).promise()
                 console.log(invocation)
-                if (invocation.Status === 'Failed' || invocation.StandardErrorContent) {
+                if (invocation.Status === 'Failed') {
                     core.setFailed(invocation.StandardErrorContent)
                     break
                 }
